@@ -1,105 +1,90 @@
-import { SearchIcon } from '@chakra-ui/icons'
-import { Box, Button, Checkbox, Flex, Image, Input, Select, Spinner, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-import { Navbar } from '../../components'
-import api from '../../services'
+import React from "react";
+import { Box, Checkbox, Image, Input, Text } from "@chakra-ui/react";
+import { CentralizedCard, EnumSelect, Navbar } from "../../components";
+import api from "../../services";
+import strings from "../../services/strings";
 
 export const Http: React.FC = () => {
 
-  const [ srcImage, setSrcImage ] = useState("")
-  const [ code, setCode ] = useState<number>(0)
-  const [ inputValue, setInputValue ] = useState<number>(0)
-  const [ isChecked, setIsChecked ] = useState<boolean>(false)
+	const [ srcImage, setSrcImage ] = React.useState("");
+	const [ code, setCode ] = React.useState<number>(0);
+	const [ inputValue, setInputValue ] = React.useState<string>("");
+	const [ isChecked, setIsChecked ] = React.useState<boolean>(false);
+	const pageStrings = strings.pages.http;
 
-  const imageNotFound = "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"
+	const imageNotFound = "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png";
 
-  useEffect(() => {
-    const fetch = async () => {
-      const response = await api.httpCats.getOneImageByHttpCode(code)
-      console.log(response)
+	React.useEffect(() => {
+		const fetch = async () => {
 
-    }
+			const codeExists = api.httpCats.httpCodes.includes(code);
+			if(codeExists) {
+				const response = await api.httpCats.getOneImageByHttpCode(code);
+				setSrcImage(response);
+				return;
+			}
+			setSrcImage(imageNotFound);
+		};
+		fetch();
 
-    fetch()
+	}, [code]);
 
-  }, [code])
+	const handleChange = (e: any) => {
+		setCode(Number(e.currentTarget.value));
+	};
 
-  const handleChange = (e: any) => {
-    setCode(e.target.value)
-  }
+	const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+		setInputValue(e.currentTarget.value);
+		setCode(Number(e.currentTarget.value));
+	};
 
-  const handleInputChange = (e: any) => {
-    setInputValue(e.target.value)
-    setCode(inputValue)
-  }
-
-  return (
-   <>
-      <Navbar />
-      <Flex 
-        w="100%"
-        justifyContent="center"
-        alignItems="center"
-      >
-          <Flex
-            justifyContent="center"
-            alignItems="center"
-            bgColor="rgba(255,255,255,0.3)"
-            borderRadius={20}
-            h={300}
-            p={20}
-            my={300}
-          >
-            <Box>
-              <Flex justifyContent="center" alignItems="center">
-                <Select
-                    w={400}
-                    placeholder="Selecione o status HTTP que deseja: "
-                    isDisabled={isChecked}
-                    bg="#FFA7B9"
-                    color="#e91e63"
-                    borderWidth={0.4}
-                    borderColor="primary.500"
-                    onChange={handleChange}
-                    value={code}
-                    mr={10}
-                    variant="filled"
-                  >
-                    <option style={{ backgroundColor: "#FFA7B9" }} value=""></option>
-                    {
-                      api.httpCats.httpCodes.map((code: number, index: number) => (
-                          <option style={{ backgroundColor: "#FFA7B9"}} key={`${code}-${index}`} value={code}>
-                            {code}
-                          </option>
-                      ))
-                    }
-                  </Select>
-              </Flex>
-              <Box>
-              <Checkbox isChecked={isChecked} onChange={() => setIsChecked(!isChecked)} mt={5} colorScheme="pink">
-                Quero selecionar outro codigo HTTP
-              </Checkbox>
-              {
-                isChecked && 
-                  <Box>
-                      <Input 
-                        type="number"
-                        w={200}
-                        my={10}
-                        bgColor="#fff"
-                        py={6}
-                        placeholder="Digite seu codigo http aqui"
-                        value={inputValue}
-                        onChange={handleInputChange}
-                      />
-                  </Box>
-              }
-            </Box>
-            </Box>
-            <Image src={srcImage} w={200} h={200} />
-
-          </Flex>
-      </Flex>
-   </>
-  )
-}
+	return (
+		<>
+			<Navbar />
+			<CentralizedCard>
+				<Box>
+					<EnumSelect 
+						isChecked={isChecked}
+						listCodes={api.httpCats.httpCodes}
+						onChange={handleChange}
+						placeholder={pageStrings.placeholderSelect}
+						value={code}
+					/>
+					<Box>
+						<Checkbox 
+							isChecked={isChecked} 
+							onChange={() => setIsChecked(!isChecked)} 
+							mt={5} 
+							colorScheme="pink"
+						>
+							<Text 
+								color="#f4f4f4" 
+								fontSize={14} 
+								fontWeight="bold"
+							>
+								{pageStrings.textCheckbox}
+							</Text>
+						</Checkbox>
+						{
+							isChecked && (
+								<Box>
+									<Input 
+										type="text"
+										w={310}
+										my={10}
+										bgColor="#fff"
+										py={3}
+										placeholder={pageStrings.placeholderInput}
+										value={inputValue}
+										onChange={handleInputChange}
+									/>
+								</Box>
+							)
+						}
+					</Box>
+				</Box>
+				<Image src={srcImage} w={200} h={200} />
+			</CentralizedCard>
+		</>
+	);
+};

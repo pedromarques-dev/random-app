@@ -1,12 +1,19 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Home } from "../pages/Home";
-import { Http } from "../pages/Http";
-import { Login } from "../pages/Login";
+import { 
+	Dog,
+	Home,
+	Http,
+	Login,
+	Users,
+} from "../pages";
 
-export const RouterStack = () => (
-    <Routes>
-        <Route index path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/http" element={<Http/>} />
-    </Routes>
-)
+export const RouterStack: React.FC = () => (
+	<Routes>
+		<Route index path="/" element={<Login />} />
+		<Route path="/home" element={<Home />} />
+		<Route path="/http" element={<Http/>} />
+		<Route path="/dog" element={<Dog />} />
+		<Route path="/users" element={<Users />} />
+	</Routes>
+);

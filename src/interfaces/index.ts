@@ -12,4 +12,9 @@ export interface IUserInfo {
       large: string;
     };
 }
+
+export interface INavLink {
+  title: string;
+  link: string;
+}
   

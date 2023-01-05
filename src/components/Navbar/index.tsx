@@ -1,45 +1,52 @@
-import React from "react"
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input, MenuIcon, useDisclosure, Text, Box } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
-import { DragHandleIcon } from "@chakra-ui/icons"
+import React from "react";
+import { 
+	Button, 
+	Drawer, 
+	DrawerBody, 
+	DrawerCloseButton, 
+	DrawerContent, 
+	DrawerOverlay,
+	useDisclosure, 
+	Box,
+	DrawerHeader,
+	Text,
+} from "@chakra-ui/react";
+import { DragHandleIcon } from "@chakra-ui/icons";
+import { NavLink } from "./NavLink";
+import { routes } from "../../services/routes";
+import { INavLink } from "../../interfaces";
+import strings from "../../services/strings";
 
 export const Navbar:React.FC = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const componentStrings = strings.components.navbar;
   
-    return (
-      <Box mb={3}>
-        <Button onClick={onOpen}>
-            <DragHandleIcon mr={2} />
-            Menu
-        </Button>
-        <Drawer
-          isOpen={isOpen}
-          placement='left'
-          onClose={onClose}
-        >
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerCloseButton />
-  
-            <DrawerBody>
-              <Link to="/" >
-                <Text mt={10} color="#e91e63" fontSize={22}>Login</Text>
-              </Link>
-              <Link to="/home" >
-                <Text mt={3} color="#e91e63" fontSize={22}>Home</Text>
-              </Link>
-              <Link to="/http" >
-                <Text mt={3} color="#e91e63" fontSize={22}>Http</Text>
-              </Link>
-            </DrawerBody>
-  
-            <DrawerFooter>
-              <Button variant='outline' mr={3} onClick={onClose}>
-                Fechar
-              </Button>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-      </Box>
-    )
-  }
+	return (
+		<Box mb={3}>
+			<Button onClick={onOpen}>
+				<DragHandleIcon mr={2} />
+				<Text>{componentStrings.menu}</Text>
+			</Button>
+			<Drawer
+				isOpen={isOpen}
+				placement='left'
+				onClose={onClose}
+			>
+				<DrawerOverlay />
+				<DrawerContent>
+					<DrawerCloseButton />
+					<DrawerHeader mt={10}>{componentStrings.titleDrawer}</DrawerHeader>
+					<DrawerBody>
+						<Box mt={5}>
+							{
+								routes.map((route: INavLink, index: number) => (
+									<NavLink key={index} route={route} />
+								))
+							}
+						</Box>
+					</DrawerBody>
+				</DrawerContent>
+			</Drawer>
+		</Box>
+	);
+};
