@@ -2,7 +2,7 @@ const strings = {
 	components: {
 		formLogin: {
 			title: "Login",
-			emailPlaceholder: "Digite seu email aqui",
+			usernamePlaceholder: "Digite seu nome de usuário aqui",
 			passwordPlaceholder: "Digite sua senha aqui",
 			rememberMe: "Lembrar de mim",
 		},
@@ -26,6 +26,12 @@ const strings = {
 		back: "Voltar",
 		enter: "Entrar",
 		next: "Próximo",
+		add: "Adicionar",
+		details: "Detalhes",
+		edit: "Editar",
+		delete: "Deletar",
+		create: "Criar",
+		register: "Cadastrar",
 	},
 	pages: {
 		dog: {
@@ -41,7 +47,20 @@ const strings = {
 			placeholderSelect: "Selecione o status HTTP que deseja:",
 			placeholderInput: "Digite seu codigo http aqui",
 			textCheckbox: "Quero selecionar outro codigo HTTP",
-		}
+		},
+		users: {
+			title: "Lista de usuários do site",
+		},
+		register: {
+			title: "Cadastre-se em nosso site",
+			placeholders: {
+				username: "Digite o seu nome de usuário",
+				email: "Digite seu email",
+				password: "Digite sua senha",
+				confirmPassword: "Confirme sua senha",
+			},
+			termsOfUse: "Li e aceito os Termos de Uso",
+		},
 	},
 };
 

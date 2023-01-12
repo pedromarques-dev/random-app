@@ -10,16 +10,21 @@ import {
 	Box,
 	DrawerHeader,
 	Text,
+	DrawerFooter,
 } from "@chakra-ui/react";
 import { DragHandleIcon } from "@chakra-ui/icons";
 import { NavLink } from "./NavLink";
 import { routes } from "../../services/routes";
 import { INavLink } from "../../interfaces";
 import strings from "../../services/strings";
+import { useHistory } from "../../hooks/useHistory";
+import AuthUser from "../../services/localstorage";
 
 export const Navbar:React.FC = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const componentStrings = strings.components.navbar;
+	const history = useHistory();
+	const auth = new AuthUser();
   
 	return (
 		<Box mb={3}>
@@ -45,6 +50,14 @@ export const Navbar:React.FC = () => {
 							}
 						</Box>
 					</DrawerBody>
+					<DrawerFooter>
+						<Button onClick={() => {
+							auth.removeFromLocalStorage();
+							history.push("/");
+						}}>
+							Sair
+						</Button>
+					</DrawerFooter>
 				</DrawerContent>
 			</Drawer>
 		</Box>

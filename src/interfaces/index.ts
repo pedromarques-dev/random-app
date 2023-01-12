@@ -17,4 +17,13 @@ export interface INavLink {
   title: string;
   link: string;
 }
+
+
+export interface IUser {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
   

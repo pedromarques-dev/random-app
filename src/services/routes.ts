@@ -2,10 +2,6 @@ import { INavLink } from "../interfaces";
 
 export const routes : INavLink[] = [
 	{
-		title: "Login",
-		link: "/",
-	},
-	{
 		title: "Home",
 		link: "/home",
 	},

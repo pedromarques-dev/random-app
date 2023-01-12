@@ -1,0 +1,73 @@
+import React from "react";
+import {
+	Flex,
+	Heading,
+	Td,
+	Tr,
+} from "@chakra-ui/react";
+import { Table, TableCellWithActionButtons } from "../../../components";
+import { useHistory } from "../../../hooks/useHistory";
+import { getAllUsers } from "../../../services/api";
+import strings from "../../../services/strings";
+
+interface IProps {
+	_id: string;
+	username: string;
+	email: string;
+}
+
+export const TableView: React.FC = () => {
+	const pageStrings = strings.pages.users;
+	const history = useHistory();
+	const [ listUsers, setListUsers ] = React.useState<IProps[]>([]);
+
+	const onGoToDetails = (id: string) => history.push(`details/${id}`);
+	const onGoToEdit = (id: string) => history.push(`edit/${id}`);
+	const onGoToCreate = () => history.push("create");
+
+	React.useEffect(() => {
+		const fetch = async () => {
+			const users = await getAllUsers();
+			setListUsers(users.users);
+		};
+
+		fetch();
+	}, []);
+
+	return (
+		<>
+			<Flex 
+				w="100%"
+				flexDir="column"
+				justifyContent="center"
+				alignItems="center"
+			>
+				<Heading 
+					textAlign="center"
+					color="#fff"
+					fontWeight="bold"
+					mb={5}
+				>
+					{pageStrings.title}
+				</Heading>
+				<Table 
+					data={listUsers}
+					emptyMessage="Erro"
+					onAdd={onGoToCreate}
+					headers={["Nome", "Email", ""]}
+					renderRow={(item, index) => (
+						<Tr key={index}>
+							<Td>{item.username}</Td>
+							<Td>{item.email}</Td>
+							<TableCellWithActionButtons
+								onView={() => onGoToDetails(item._id)}
+								onEdit={() => onGoToEdit(item._id)}
+							/>
+						</Tr>
+					)}
+				/>
+			</Flex>
+		</>
+	);
+};
+

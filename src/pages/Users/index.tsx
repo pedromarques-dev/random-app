@@ -1,8 +1,7 @@
-import React from "react";
+import { TableView } from "./Table";
+import { Details } from "./Details/index";
 
-export const Users: React.FC = () => {
-	return (
-		<div>index</div>
-	);
+export const Users = {
+	TableView,
+	Details,
 };
-

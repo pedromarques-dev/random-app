@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Checkbox, Image, Input, Text } from "@chakra-ui/react";
+import { Box, Checkbox, Image, Input, Select, Text } from "@chakra-ui/react";
 import { CentralizedCard, EnumSelect, Navbar } from "../../components";
 import api from "../../services";
 import strings from "../../services/strings";
@@ -29,7 +29,7 @@ export const Http: React.FC = () => {
 
 	}, [code]);
 
-	const handleChange = (e: any) => {
+	const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setCode(Number(e.currentTarget.value));
 	};
 

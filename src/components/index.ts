@@ -6,3 +6,5 @@ export { CentralizedCard } from "./CentralizedCard";
 export { EnumSelect } from "./EnumSelect";
 export { UsersList } from "./UsersList";
 export { FormLogin } from "./FormLogin";
+export { Table } from "./Table";
+export { TableCellWithActionButtons } from "./TableCellWithActionButtons";

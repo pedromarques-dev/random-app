@@ -6,9 +6,27 @@ import {
 	Box,
 } from "@chakra-ui/react";
 import strings from "../../services/strings";
+import { IUser } from "../../interfaces";
 
-export const FormLogin: React.FC = () => {
+interface IProps {
+	username: string;
+	password: string;
+	handleUsername: React.ChangeEventHandler<HTMLInputElement>;
+	handlePassword: React.ChangeEventHandler<HTMLInputElement>;
+	isChecked: boolean;
+	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const FormLogin: React.FC<IProps> = (props) => {
 	const componentStrings = strings.components.formLogin;
+	const {
+		username,
+		password,
+		handlePassword,
+		handleUsername,
+		isChecked,
+		onChange,
+	} = props;
 	return (
 		<Box>
 			<Heading 
@@ -21,18 +39,27 @@ export const FormLogin: React.FC = () => {
 			</Heading>
 			<Input
 				bgColor="#fff"
-				type="email"
-				placeholder={componentStrings.emailPlaceholder}
+				type="text"
+				value={username}
+				onChange={handleUsername}
+				placeholder={componentStrings.usernamePlaceholder}
 				my={10}
 				py={6}
 			/>
 			<Input
 				bgColor="#fff"
 				type="password"
+				value={password}
+				onChange={handlePassword}
 				placeholder={componentStrings.passwordPlaceholder}
 				py={6}
 			/>
-			<Checkbox mt={5} colorScheme="pink">
+			<Checkbox 
+				mt={5} 
+				colorScheme="pink" 
+				isChecked={isChecked}
+				onChange={onChange}
+			>
 				{componentStrings.rememberMe}
 			</Checkbox>
 		</Box>
