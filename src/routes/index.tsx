@@ -19,6 +19,7 @@ export const RouterStack: React.FC = () => (
 		<Route path="users">
 			<Route index path="/users" element={<Users.TableView />} />
 			<Route path="/users/details/:_id" element={<Users.Details />} />
+			<Route path="/users/edit/:_id" element={<Users.Edit />} />
 		</Route>
 	</Routes>
 );

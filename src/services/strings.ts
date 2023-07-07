@@ -22,6 +22,11 @@ const strings = {
 			},
 		},
 	},
+	feedbacks: {
+		authenticateIsSuccess: "Você foi autenticado com sucesso!",
+		createUserIsSuccess: "Usuário criado com sucesso!",
+		deleteUserIsSuccess: "Usuário deletado com sucesso!",
+	},
 	generals: {
 		back: "Voltar",
 		enter: "Entrar",
@@ -50,6 +55,9 @@ const strings = {
 		},
 		users: {
 			title: "Lista de usuários do site",
+			edit: {
+				title: "Editar usuário",
+			}
 		},
 		register: {
 			title: "Cadastre-se em nosso site",

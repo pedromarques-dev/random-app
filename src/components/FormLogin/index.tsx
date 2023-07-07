@@ -13,8 +13,6 @@ interface IProps {
 	password: string;
 	handleUsername: React.ChangeEventHandler<HTMLInputElement>;
 	handlePassword: React.ChangeEventHandler<HTMLInputElement>;
-	isChecked: boolean;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const FormLogin: React.FC<IProps> = (props) => {
@@ -24,8 +22,6 @@ export const FormLogin: React.FC<IProps> = (props) => {
 		password,
 		handlePassword,
 		handleUsername,
-		isChecked,
-		onChange,
 	} = props;
 	return (
 		<Box>
@@ -53,15 +49,8 @@ export const FormLogin: React.FC<IProps> = (props) => {
 				onChange={handlePassword}
 				placeholder={componentStrings.passwordPlaceholder}
 				py={6}
+				mb={5}
 			/>
-			<Checkbox 
-				mt={5} 
-				colorScheme="pink" 
-				isChecked={isChecked}
-				onChange={onChange}
-			>
-				{componentStrings.rememberMe}
-			</Checkbox>
 		</Box>
 	);
 };

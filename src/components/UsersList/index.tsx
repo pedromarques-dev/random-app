@@ -10,6 +10,7 @@ interface IProps {
     onGoPreviousPage: () => void;
     onGoNextPage: () => void;
     showButton: boolean;
+	search: string;
 }
 
 export const UsersList: React.FC<IProps> = (props) => {
@@ -19,6 +20,7 @@ export const UsersList: React.FC<IProps> = (props) => {
 		onGoNextPage,
 		pagination,
 		showButton,
+		search,
 	} = props;
 	return (
 		<Box>
@@ -30,7 +32,7 @@ export const UsersList: React.FC<IProps> = (props) => {
 				}
 			</Flex>
 			{
-				showButton && (
+				showButton || search === "" && (
 					<Pagination 
 						onBack={onGoPreviousPage}
 						onNext={onGoNextPage}

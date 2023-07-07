@@ -25,7 +25,7 @@ export const UserCard: React.FC<IProps> = ({user}) => {
 			bgColor="rgba(255,255,255,0.3)"
 		>
 			<Center>
-				<Image borderRadius="50%" src={user.picture.large} />
+				<Image borderRadius="50%" src={user.picture.large} alt="Avatar do usuário" />
 			</Center>
 			<Flex w="100%" flexDir="column" mt={2}>
 				<Text color="white" w="100%" textAlign="center">{componentStrings.labels.name} {user.name.first} {user.name.last}</Text>

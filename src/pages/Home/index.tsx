@@ -9,15 +9,19 @@ import {
 	UsersList,
 } from "../../components";
 import strings from "../../services/strings";
+import { Loading } from "../../components/Loading";
 
 export const Home: React.FC = () => {
 	const [ users, setUsers ] = React.useState<IUserInfo[]>([]);
 	const [ newUsers, setNewUsers ] = React.useState<IUserInfo[]>([]);
 	const [ pagination, setPagination ] = React.useState<number>(1);
-	const [search, setSearch] = React.useState<string>("");
-	const [showButtonPagination, setShowButtonPagination] = React.useState<boolean>(true);
+	const [ search, setSearch ] = React.useState<string>("");
+	const [ showButtonPagination, setShowButtonPagination ] = React.useState<boolean>(true);
+	const [ loading, setLoading ] = React.useState<boolean>(false);
 	const twoSecondsInMiliSeconds = 2000;
 	const pageStrings = strings.pages.home;
+
+	console.log(search, "serach");
 
 	React.useEffect(() => {
 		const fetch = async () => {
@@ -42,6 +46,7 @@ export const Home: React.FC = () => {
 
 	const handleChange = (event: any) => {
 		setSearch(event.target.value);
+		setLoading(true);
 
 		setTimeout(() => {
 			filterUsers();
@@ -72,6 +77,7 @@ export const Home: React.FC = () => {
 			searchToLowerCase(userActual.email)
 			);
 		});
+		setLoading(false);
 		setNewUsers(usersFiltered);
 	};
 
@@ -94,17 +100,24 @@ export const Home: React.FC = () => {
 								pagination={pagination}
 								users={users}
 								showButton={showButtonPagination}
+								search={search}
 							/>
 						) : (
 							<Box w="100%" textAlign="center">
-								<Heading w="100%" textAlign="center" fontSize={18} my={3}>{pageStrings.findBy} {search}</Heading>
-								<Flex wrap="wrap" justifyContent="center" alignItems="center" mt={5}>
-									{
-										newUsers.map((user: IUserInfo, index: number) => (
-											<UserCard key={index} user={user} />
-										))
-									}
-								</Flex>
+								{
+									loading ?  ( 
+										<Loading p={20} />
+									) : (
+										<Flex wrap="wrap" justifyContent="center" alignItems="center" mt={5}>
+											{
+												newUsers.map((user: IUserInfo, index: number) => (
+													<UserCard key={index} user={user} />
+												))
+											}
+										</Flex>
+									)
+								}
+								
 							</Box>
             
 						)

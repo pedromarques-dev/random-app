@@ -1,8 +1,10 @@
 import React from "react";
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Button, Flex, Heading } from "@chakra-ui/react";
 import { getOneUserById } from "../../../services/api";
 import { CentralizedCard } from "../../../components";
 import { DetailsRow } from "../../../components/DetailsRow";
+import { useHistory } from "../../../hooks/useHistory";
+import strings from "../../../services/strings";
 
 
 interface IProps {
@@ -15,9 +17,9 @@ export const Details: React.FC = () => {
 	const _id = React.useId();
 	const [ user, setUser ] = React.useState<IProps>({
 		username: "",
-		email: "",
-        
+		email: "", 
 	});
+	const history = useHistory();
     
 	React.useEffect(() => {
 		const fetch = async () => {
@@ -30,8 +32,8 @@ export const Details: React.FC = () => {
 
 	return (
 		<Flex justifyContent="center" flexDirection="column" alignItems="center">
-			<Heading>Detalhes</Heading>
-			<CentralizedCard boxProps={{ flexDir: "column"}}>
+			<CentralizedCard boxProps={{ flexDir: "column", w: 600, p: 10}}>
+				<Heading>Detalhes</Heading>
 				<DetailsRow
 					label="Nome de usuário"
 					value={user.username}
@@ -46,6 +48,22 @@ export const Details: React.FC = () => {
 						mb: 5,
 					}}
 				/>
+				<Button 
+					type="button"
+					size="md"
+					w="60%"
+					_hover={{
+						bgColor: "#FFA7B9",
+						color: "#e91e63"
+					}}
+					bgColor="rgba(255,255,255,0.1)"
+					color="white"
+					my={5}
+					py={7}
+					onClick={() => history.goBack()}
+				>
+					{strings.generals.back}
+				</Button>
 			</CentralizedCard>
 		</Flex>
 	);

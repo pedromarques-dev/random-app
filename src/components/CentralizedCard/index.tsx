@@ -14,14 +14,14 @@ export const CentralizedCard: React.FC<IProps> = (props) => {
 			w="100%"
 			justifyContent="center"
 			alignItems="center"
+			my={150}
 		>
 			<Flex
-				{...boxProps}
 				alignItems="center"
 				bgColor="rgba(255,255,255,0.3)"
 				borderRadius={20}
-				p={20}
-				my={150}
+				{...boxProps}
+
 			>
 				{children}
 			</Flex>

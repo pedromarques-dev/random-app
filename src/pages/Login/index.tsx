@@ -10,20 +10,16 @@ import { useHistory } from "../../hooks/useHistory";
 import { FormLogin } from "../../components";
 import strings from "../../services/strings";
 
-import { AxiosError } from "axios";
 import { Link } from "react-router-dom";
 import { showErrorToast, showSuccessToast } from "../../services/toast";
 import { authLogin } from "../../services/api";
-import AuthUser from "../../services/localstorage";
+import { AxiosError } from "axios";
 
 export const Login: React.FC = () => {
 
 	const history = useHistory();
 	const [ username, setUsername ] = React.useState<string>("");
 	const [ password, setPassword ] = React.useState<string>("");
-	const [ isChecked, setIsChecked ] = React.useState<boolean>(false);
-
-	const auth = new AuthUser();
 
 	const handleUsername = (e: React.FormEvent<HTMLInputElement>) => {
 		setUsername(e.currentTarget.value);
@@ -36,10 +32,7 @@ export const Login: React.FC = () => {
 	const onLogin = async () => {
 		try {
 			const user = await authLogin(username, password);
-			if (isChecked) {
-				auth.saveOnLocalStorage(username);
-			}
-			showSuccessToast("Você foi autenticado com sucesso!", `Bem vindo ao nosso site ${user.data.username}`);
+			showSuccessToast(strings.feedbacks.authenticateIsSuccess, `Bem vindo ao nosso site ${user.data.username}`);
 			history.push("/home");
 		} catch (e) {
 			const error = e as AxiosError<{msg: string}>;
@@ -68,11 +61,15 @@ export const Login: React.FC = () => {
 						handleUsername={handleUsername}
 						password={password}
 						handlePassword={handlePassword}
-						isChecked={isChecked}
-						onChange={() => setIsChecked(!isChecked)}
 					/>
 					<Link to="/register">
-						<Text mt={1} fontSize={12}>Nao possui conta? cadastre-se</Text>
+						<Text 
+							fontSize={14} 
+							color="#fafafa"
+							fontWeight="bold"
+						>
+							Nao possui conta? cadastre-se
+						</Text>
 					</Link>
 					<Button 
 						type="button"

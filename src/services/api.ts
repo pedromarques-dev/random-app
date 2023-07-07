@@ -1,6 +1,5 @@
-import React from "react";
 import axios from "axios";
-import { IUser } from "../interfaces";
+import { IEditUser, IUser } from "../interfaces";
 
 const baseUrl = "http://localhost:3333";
 
@@ -28,4 +27,15 @@ export const getAllUsers = async () => {
 export const getOneUserById = async (id: string) => {
 	const user = await fetch(`${baseUrl}/users/details/${id}`);
 	return user.json();
+};
+
+export const deleteUser = async (id: string) => {
+	return axios.delete(`${baseUrl}/users/delete/${id}`);
+};
+
+export const editUser = async (user: IEditUser, id: string) => {
+	return axios.patch(`${baseUrl}/users/edit/${id}`, {
+		username: user.username,
+		email: user.email,
+	});
 };

@@ -26,4 +26,8 @@ export interface IUser {
   confirmPassword: string;
 }
 
+export interface IEditUser {
+  username: string;
+  email: string;
+}
   

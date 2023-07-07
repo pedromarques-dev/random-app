@@ -5,10 +5,11 @@ import {
 	Td,
 	Tr,
 } from "@chakra-ui/react";
-import { Table, TableCellWithActionButtons } from "../../../components";
+import { Navbar, Table, TableCellWithActionButtons } from "../../../components";
 import { useHistory } from "../../../hooks/useHistory";
-import { getAllUsers } from "../../../services/api";
+import { deleteUser, getAllUsers } from "../../../services/api";
 import strings from "../../../services/strings";
+import { showSuccessToast } from "../../../services/toast";
 
 interface IProps {
 	_id: string;
@@ -23,7 +24,13 @@ export const TableView: React.FC = () => {
 
 	const onGoToDetails = (id: string) => history.push(`details/${id}`);
 	const onGoToEdit = (id: string) => history.push(`edit/${id}`);
-	const onGoToCreate = () => history.push("create");
+
+	const onDelete = async (id: string) => {
+		await deleteUser(id);
+		window.location.reload();
+		showSuccessToast(strings.feedbacks.deleteUserIsSuccess);
+		
+	};
 
 	React.useEffect(() => {
 		const fetch = async () => {
@@ -36,6 +43,7 @@ export const TableView: React.FC = () => {
 
 	return (
 		<>
+			<Navbar />
 			<Flex 
 				w="100%"
 				flexDir="column"
@@ -52,16 +60,15 @@ export const TableView: React.FC = () => {
 				</Heading>
 				<Table 
 					data={listUsers}
-					emptyMessage="Erro"
-					onAdd={onGoToCreate}
-					headers={["Nome", "Email", ""]}
+					emptyMessage="Sem resultados!"
+					headers={["Nome",  ""]}
 					renderRow={(item, index) => (
 						<Tr key={index}>
 							<Td>{item.username}</Td>
-							<Td>{item.email}</Td>
 							<TableCellWithActionButtons
 								onView={() => onGoToDetails(item._id)}
 								onEdit={() => onGoToEdit(item._id)}
+								onDelete={() => onDelete(item._id)}
 							/>
 						</Tr>
 					)}

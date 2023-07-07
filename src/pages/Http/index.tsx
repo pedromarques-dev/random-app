@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Checkbox, Image, Input, Select, Text } from "@chakra-ui/react";
+import { Box, Checkbox, Image, Input, Text } from "@chakra-ui/react";
 import { CentralizedCard, EnumSelect, Navbar } from "../../components";
 import api from "../../services";
 import strings from "../../services/strings";
@@ -29,7 +29,7 @@ export const Http: React.FC = () => {
 
 	}, [code]);
 
-	const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setCode(Number(e.currentTarget.value));
 	};
 
@@ -41,12 +41,12 @@ export const Http: React.FC = () => {
 	return (
 		<>
 			<Navbar />
-			<CentralizedCard>
+			<CentralizedCard boxProps={{p: 10}}>
 				<Box>
 					<EnumSelect 
 						isChecked={isChecked}
 						listCodes={api.httpCats.httpCodes}
-						onChange={handleChange}
+						onChange={handleSelectChange}
 						placeholder={pageStrings.placeholderSelect}
 						value={code}
 					/>
@@ -83,7 +83,7 @@ export const Http: React.FC = () => {
 						}
 					</Box>
 				</Box>
-				<Image src={srcImage} w={200} h={200} />
+				<Image src={srcImage} alt="Imagem do gato referente ao codigo Http" w={200} h={200} />
 			</CentralizedCard>
 		</>
 	);

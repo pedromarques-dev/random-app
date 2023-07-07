@@ -67,7 +67,7 @@ export const Register: React.FC = () => {
 	const registerUser = async () => {
 		try {
 			await createUser(user);
-			showSuccessToast("Usuário criado com sucesso!");
+			showSuccessToast(strings.feedbacks.createUserIsSuccess);
 			history.push("/");
 		} catch (e) {
 			const error = e as AxiosError<{msg: string}>;
@@ -135,9 +135,6 @@ export const Register: React.FC = () => {
 							placeholder={pageStrings.placeholders.confirmPassword}
 							py={6}
 						/>
-						<Checkbox mt={5} colorScheme="pink">
-							{pageStrings.termsOfUse}
-						</Checkbox>
 					</Box>
 					<Button 
 						type="button"

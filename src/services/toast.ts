@@ -7,7 +7,7 @@ export const showSuccessToast = (message: string, title?: string) => {
 		title,
 		description: message,
 		status: "success",
-		duration: 2000,
+		duration: 3000,
 		isClosable: true,
 	});
 };
@@ -19,7 +19,7 @@ export const showErrorToast = (message: string, title?: string) => {
 		title,
 		description: message,
 		status: "error",
-		duration: 2000,
+		duration: 3000,
 		isClosable: true,
 	});
 };

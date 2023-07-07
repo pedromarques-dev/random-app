@@ -11,8 +11,6 @@ export interface IDetailsProps {
 	label?: string;
 	value: string | string[] | number | null;
 	boxProps?: BoxProps;
-	isOutline?: boolean;
-	isAvaliation?: boolean;
 }
 
 export const DetailsRow: React.FC<IDetailsProps> = (props) => {
@@ -20,19 +18,17 @@ export const DetailsRow: React.FC<IDetailsProps> = (props) => {
 		value,
 		label,
 		boxProps,
-		isOutline,
-		isAvaliation,
 	} = props;
 
 	return (
 		<Box w="100%" {...boxProps} >
 			{!Array.isArray(value) ?
 				(
-					<Stack spacing={1}>
+					<Stack spacing={0}>
 						<Text
 							{...boxProps}
 							fontSize="md"
-							color={isAvaliation ? "primary.500" : "gray.900"}
+							color="primary.500"
 							fontWeight="bold"
 						>
 							{label}
@@ -41,11 +37,11 @@ export const DetailsRow: React.FC<IDetailsProps> = (props) => {
 							maxW="100%"
 							fontSize="md"
 							color="gray.700"
-							p={2}
+							p={3}
 							borderRadius="lg"
-							backgroundColor={isOutline ? "none" : "#f5f5f5"}
+							backgroundColor="#f5f5f5"
 							borderColor="primary.500"
-							variant={isOutline ? "outline" : "solid"}
+							variant="solid"
 							h={!value ? 10 : "100%"}
 							wordBreak="break-all"
 						>
