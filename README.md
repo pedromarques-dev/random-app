@@ -14,8 +14,11 @@
     </li>
         <p>
             DB_USER=pedromarques-dev
+        </p>
+        <p>
             DB_PASS=qwq3DntfaxbWX1zl
         </p>
+       
     <li>
         Digitar o seguinte comando no terminal dentro do diretorio da api: npm run dev ou yarn dev
     </li>
