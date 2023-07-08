@@ -11,17 +11,17 @@
     </li>
      <li>
         Dentro deste arquivo .env você deve colocar os seguintes dados:
-    </li>
         <p>
             DB_USER=pedromarques-dev
         </p>
         <p>
             DB_PASS=qwq3DntfaxbWX1zl
         </p>
-       
-    <li>
-        Digitar o seguinte comando no terminal dentro do diretorio da api: npm run dev ou yarn dev
     </li>
+    <li>
+         Digitar o seguinte comando no terminal dentro do diretorio da api: npm run dev ou yarn dev
+    </li>
+
 </ul>
 <h2>Feito isso, a api do projeto estará rodando. Agora vamos buildar o front do projeto atraves deste passo a passo:</h2>
 <ul>
