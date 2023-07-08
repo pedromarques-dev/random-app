@@ -22,7 +22,7 @@
          Digitar o seguinte comando no terminal dentro do diretorio da api: npm run dev ou yarn dev
     </li>
     <h3>Aparecerá essa mensagem no terminal:</h3>
-    ![image](https://github.com/pedromarques-dev/random-app/assets/81711739/d09ba2d2-64d2-4a8f-b242-a7cbe3d4dcfc)
+    <img  src="https://github.com/pedromarques-dev/random-app/assets/81711739/d09ba2d2-64d2-4a8f-b242-a7cbe3d4dcfc" />
 
 
 </ul>
