@@ -5,11 +5,13 @@ import { ContainerGeral } from "./components";
 
 const App: React.FC = () => {
 	return (
-		<ChakraProvider>
-			<ContainerGeral>
-				<RouterStack />
-			</ContainerGeral>
-		</ChakraProvider>
+		<React.StrictMode>
+			<ChakraProvider>
+				<ContainerGeral>
+					<RouterStack />
+				</ContainerGeral>
+			</ChakraProvider>
+		</React.StrictMode>
 	);
 };
 
