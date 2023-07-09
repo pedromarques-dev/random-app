@@ -22,6 +22,7 @@ export const UsersList: React.FC<IProps> = (props) => {
 		showButton,
 		search,
 	} = props;
+
 	return (
 		<Box>
 			<Flex wrap="wrap" justifyContent="center" alignItems="center" mt={5}>
@@ -32,7 +33,7 @@ export const UsersList: React.FC<IProps> = (props) => {
 				}
 			</Flex>
 			{
-				showButton || search === "" && (
+				showButton &&  (
 					<Pagination 
 						onBack={onGoPreviousPage}
 						onNext={onGoNextPage}

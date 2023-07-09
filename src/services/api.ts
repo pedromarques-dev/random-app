@@ -29,10 +29,6 @@ export const getOneUserById = async (id: string) => {
 	return user.json();
 };
 
-export const deleteUser = async (id: string) => {
-	return axios.delete(`${baseUrl}/users/delete/${id}`);
-};
-
 export const editUser = async (user: IEditUser, id: string) => {
 	return axios.patch(`${baseUrl}/users/edit/${id}`, {
 		username: user.username,

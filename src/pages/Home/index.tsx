@@ -21,7 +21,8 @@ export const Home: React.FC = () => {
 	const twoSecondsInMiliSeconds = 2000;
 	const pageStrings = strings.pages.home;
 
-	console.log(search, "serach");
+	console.log(showButtonPagination);
+	console.log(search.length);
 
 	React.useEffect(() => {
 		const fetch = async () => {
@@ -30,7 +31,7 @@ export const Home: React.FC = () => {
 		};
     
 		fetch();
-	}, [pagination]);
+	}, [pagination, search]);
 
 	const onGoNextPage = () => {
 		if (pagination === 5) return ;
@@ -48,6 +49,12 @@ export const Home: React.FC = () => {
 		setSearch(event.target.value);
 		setLoading(true);
 
+		if (event.target.value === "") {
+			setShowButtonPagination(true);
+		} else {
+			setShowButtonPagination(false);
+		}
+
 		setTimeout(() => {
 			filterUsers();
 		}, twoSecondsInMiliSeconds);
@@ -59,12 +66,6 @@ export const Home: React.FC = () => {
 	};
 
 	const filterUsers = async () => {
-
-		if (!search) {
-			setShowButtonPagination(true);
-		} else {
-			setShowButtonPagination(false);
-		}
 
 		const usersFiltered = users.filter((userActual) => {
 			return (

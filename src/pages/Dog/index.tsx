@@ -11,7 +11,7 @@ export const Dog: React.FC = () => {
 	const [ loading, setLoading ] = React.useState<boolean>(false);
 	const pageStrings = strings.pages.dog;
 
-	const mockDog = "https://www.hypeness.com.br/1/2019/09/Vira-lata_Caramelo_horizontal.jpg"	;
+	const mockDog = "https://www.hypeness.com.br/1/2019/09/Vira-lata_Caramelo_horizontal.jpg";
 
 	React.useEffect(() => {
 		const fetch = async () => {
@@ -32,7 +32,7 @@ export const Dog: React.FC = () => {
 					loading ? (
 						<Loading p={20} />
 					) : (
-						<Image src={srcImage ? srcImage : mockDog} alt="cachorro" w={200} h={200} />
+						<Image src={srcImage.charAt(srcImage.length - 1) !== "4" ? srcImage : mockDog} alt="cachorro" w={200} h={200} />
 					)
 				}
 				<Button mt={10} onClick={() => window.location.reload()}>{pageStrings.attPhoto}</Button>
