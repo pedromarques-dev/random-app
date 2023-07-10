@@ -10,6 +10,7 @@ import {
 } from "../../components";
 import strings from "../../services/strings";
 import { Loading } from "../../components/Loading";
+import { useDebounce } from "../../hooks/useDebounce";
 
 export const Home: React.FC = () => {
 	const [ users, setUsers ] = React.useState<IUserInfo[]>([]);
@@ -21,8 +22,7 @@ export const Home: React.FC = () => {
 	const twoSecondsInMiliSeconds = 2000;
 	const pageStrings = strings.pages.home;
 
-	console.log(showButtonPagination);
-	console.log(search.length);
+	const debounce = useDebounce();
 
 	React.useEffect(() => {
 		const fetch = async () => {
@@ -31,7 +31,7 @@ export const Home: React.FC = () => {
 		};
     
 		fetch();
-	}, [pagination, search]);
+	}, [pagination]);
 
 	const onGoNextPage = () => {
 		if (pagination === 5) return ;
@@ -48,16 +48,19 @@ export const Home: React.FC = () => {
 	const handleChange = (event: any) => {
 		setSearch(event.target.value);
 		setLoading(true);
+		debounce.clearTimer();
+		debounce.setTimer(
+			setTimeout(() => {
+				filterUsers();
+			}, twoSecondsInMiliSeconds),
+		);
+
 
 		if (event.target.value === "") {
 			setShowButtonPagination(true);
 		} else {
 			setShowButtonPagination(false);
 		}
-
-		setTimeout(() => {
-			filterUsers();
-		}, twoSecondsInMiliSeconds);
 	};
 
 	const searchToLowerCase = (str: string) => {
